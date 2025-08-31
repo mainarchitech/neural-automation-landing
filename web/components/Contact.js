@@ -10,36 +10,13 @@ const Contact = () => {
     company: '',
     message: ''
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus(null)
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      })
-
-      const result = await response.json()
-
-      if (result.success) {
-        setSubmitStatus({ type: 'success', message: result.message })
-        setFormData({ name: '', email: '', company: '', message: '' })
-      } else {
-        setSubmitStatus({ type: 'error', message: result.error || 'Произошла ошибка' })
-      }
-    } catch (error) {
-      setSubmitStatus({ type: 'error', message: 'Ошибка сети или сервера' })
-    } finally {
-      setIsSubmitting(false)
-    }
+    // Здесь будет логика отправки формы
+    console.log('Form submitted:', formData)
+    alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.')
+    setFormData({ name: '', email: '', company: '', message: '' })
   }
 
   const handleChange = (e) => {
@@ -142,27 +119,12 @@ const Contact = () => {
 
               <motion.button
                 type="submit"
-                disabled={isSubmitting}
-                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className={`w-full py-4 rounded-lg font-semibold transition-all ${
-                  isSubmitting
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg'
-                }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-lg font-semibold hover:shadow-lg transition-shadow"
               >
-                {isSubmitting ? 'Отправка...' : 'Отправить сообщение'}
+                Отправить сообщение
               </motion.button>
-
-              {submitStatus && (
-                <div className={`mt-4 p-3 rounded-lg text-center ${
-                  submitStatus.type === 'success' 
-                    ? 'bg-green-100 text-green-700' 
-                    : 'bg-red-100 text-red-700'
-                }`}>
-                  {submitStatus.message}
-                </div>
-              )}
             </form>
           </motion.div>
 
