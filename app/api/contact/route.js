@@ -38,6 +38,18 @@ export async function POST(request) {
 
     if (error) {
       console.error('Supabase error:', error)
+      
+      // Проверяем, является ли ошибка ошибкой конфигурации
+      if (error.message === 'Supabase not configured') {
+        return Response.json(
+          { 
+            success: false, 
+            error: 'Сервис временно недоступен. Пожалуйста, попробуйте позже.' 
+          },
+          { status: 503 }
+        )
+      }
+      
       return Response.json(
         { success: false, error: 'Ошибка при сохранении данных' },
         { status: 500 }
