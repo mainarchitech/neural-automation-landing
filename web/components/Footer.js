@@ -15,7 +15,7 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-              NeuralAutomate
+              Neural Automation
             </div>
             <p className="text-gray-400 mb-6">
               Передовые решения для автоматизации бизнеса с использованием искусственного интеллекта и нейросетей
@@ -128,7 +128,7 @@ const Footer = () => {
           className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center"
         >
           <p className="text-gray-400 text-sm">
-            © 2024 NeuralAutomate. Все права защищены.
+            © 2025 Neural Automation. Все права защищены.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             {['Политика конфиденциальности', 'Условия использования', 'Cookies'].map((item, index) => (

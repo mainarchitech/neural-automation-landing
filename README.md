@@ -1,4 +1,4 @@
-# NeuralAutomate - AI Automation Landing Page
+# Neural Automation - AI Automation Landing Page
 
 ![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-18.2-blue?style=for-the-badge&logo=react)
