@@ -49,6 +49,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 ## 📱 Responsive Design
 
 The website is fully responsive and optimized for:
+
 - 📱 Mobile devices
 - 💻 Tablets
 - 🖥️ Desktop screens
@@ -57,12 +58,15 @@ The website is fully responsive and optimized for:
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
 ### Netlify
+
 [![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/)
 
 ### Manual Deployment
+
 ```bash
 npm run build
 npm start
