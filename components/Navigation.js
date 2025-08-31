@@ -31,7 +31,7 @@ const Navigation = ({ activeTab, setActiveTab }) => {
               <motion.button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
                   activeTab === tab.id
                     ? 'text-white'
                     : 'text-gray-600 hover:text-gray-900'
@@ -42,7 +42,7 @@ const Navigation = ({ activeTab, setActiveTab }) => {
                 {activeTab === tab.id && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg"
+                    className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl"
                     initial={false}
                     transition={{
                       type: "spring",
