@@ -93,7 +93,7 @@ const Footer = () => {
           >
             <h3 className="text-lg font-semibold mb-4">Контакты</h3>
             <div className="space-y-2 text-gray-400">
-              <p>📧 contact@neuralautomate.com</p>
+              <p>📧 contacts@neural-automation.tech</p>
               <p>📞 +7 (999) 123-45-67</p>
               <p>📍 Москва, Пресненская наб., 12</p>
             </div>

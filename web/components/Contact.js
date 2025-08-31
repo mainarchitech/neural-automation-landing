@@ -146,8 +146,8 @@ const Contact = () => {
                   {
                     icon: "📧",
                     label: "Email",
-                    value: "contact@neuralautomate.com",
-                    link: "mailto:contact@neuralautomate.com"
+                    value: "contacts@neural-automation.tech",
+                    link: "mailto:contacts@neural-automation.tech"
                   },
                   {
                     icon: "📞",
