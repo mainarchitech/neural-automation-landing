@@ -56,7 +56,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-white/60 backdrop-blur-sm rounded-3xl p-8 shadow-lg"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16"
         >
           {[
             { number: '95%', label: 'Точность AI' },
