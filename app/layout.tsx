@@ -1,8 +1,18 @@
-import './globals.css'
+import './globals.css';
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
+import React from 'react';
 
-export const metadata = {
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+export const metadata: Metadata = {
   title: 'NeuralAutomate - AI-Powered Automation Solutions',
-  description: 'Revolutionize your business with cutting-edge neural network automation technologies',
+  description:
+    'Revolutionize your business with cutting-edge neural network automation technologies',
   manifest: '/manifest.json',
   icons: {
     icon: [
@@ -16,26 +26,27 @@ export const metadata = {
       { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/favicon-256x256.png', sizes: '256x256', type: 'image/png' },
       { url: '/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
-      { url: '/favicon.ico', sizes: 'any', type: 'image/x-icon' },
+      { url: '/favicon.ico', rel: 'icon', sizes: 'any', type: 'image/x-icon' },
     ],
-    apple: [
-      { url: '/favicon-180x180.png', sizes: '180x180', type: 'image/png' },
-    ],
+    apple: [{ url: '/favicon-180x180.png', sizes: '180x180', type: 'image/png' }],
   },
-}
+  themeColor: '#0ea5e9',
+};
 
-export default function RootLayout({ children }) {
+export const viewport: Viewport = {
+  themeColor: '#0ea5e9',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon-180x180.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0ea5e9" />
-      </head>
+    <html lang="ru" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans antialiased">
         {children}
       </body>
     </html>
-  )
+  );
 }
