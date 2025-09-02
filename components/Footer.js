@@ -44,15 +44,16 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Услуги</h3>
             <ul className="space-y-2">
               {[
-                'Автоматизация процессов',
-                'AI Аналитика',
-                'Чат-боты',
-                'Интеграция AI',
-                'Консалтинг'
+                { name: 'Автоматизация процессов', description: 'Оптимизация бизнес-процессов с помощью AI', link: '/automation/processes' },
+                { name: 'AI Аналитика', description: 'Глубокий анализ данных нейросетями', link: '/automation/analytics' },
+                { name: 'Чат-боты', description: 'Умные помощники для клиентов', link: '/automation/chatbots' },
+                { name: 'Интеграция AI', description: 'Внедрение AI в существующие системы', link: '/automation/integration' },
+                { name: 'Консалтинг', description: 'Стратегическое планирование автоматизации', link: '/automation/consulting' }
               ].map((service, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                    {service}
+                  <a href={service.link} className="text-gray-400 hover:text-white transition-colors group">
+                    <div className="font-medium group-hover:text-blue-400">{service.name}</div>
+                    <div className="text-sm text-gray-500 group-hover:text-gray-300">{service.description}</div>
                   </a>
                 </li>
               ))}
