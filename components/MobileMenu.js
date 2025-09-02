@@ -44,7 +44,7 @@ const MobileMenu = ({ isOpen, onClose, activeTab, setActiveTab }) => {
 
               {/* Logo */}
               <div className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">
-                NeuralAutomate
+                Neural Automation
               </div>
 
               {/* Menu Items */}
