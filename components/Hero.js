@@ -12,9 +12,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
         >
-          Будущее автоматизации
-          <br />
-          <span className="text-gray-900">уже здесь</span>
+          Будущее автоматизации уже здесь
         </motion.h1>
         
         <motion.p
