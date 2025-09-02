@@ -67,7 +67,8 @@ const Navigation = ({ activeTab, setActiveTab }) => {
               whileTap={{ scale: 0.95 }}
               className="hidden md:block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-xl font-medium hover:shadow-lg transition-shadow"
             >
-              Начать проект
+              <span className="hidden lg:inline">Начать проект</span>
+              <span className="lg:hidden">Начать</span>
             </motion.button>
 
             {/* Mobile Menu Button - shown only on mobile */}

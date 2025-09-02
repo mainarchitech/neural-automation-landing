@@ -47,8 +47,17 @@ const MobileMenu = ({ isOpen, onClose, activeTab, setActiveTab }) => {
                 Neural Automation
               </div>
 
+              {/* CTA Button */}
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-xl text-lg font-medium hover:shadow-lg transition-shadow text-left"
+              >
+                Начать проект
+              </motion.button>
+
               {/* Menu Items */}
-              <nav className="space-y-4">
+              <nav className="space-y-4 mt-8">
                 {menuItems.map((item) => (
                   <motion.button
                     key={item.id}
@@ -68,15 +77,6 @@ const MobileMenu = ({ isOpen, onClose, activeTab, setActiveTab }) => {
                   </motion.button>
                 ))}
               </nav>
-
-              {/* CTA Button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-shadow"
-              >
-                Начать проект
-              </motion.button>
             </div>
           </motion.div>
         </>
