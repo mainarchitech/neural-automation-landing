@@ -15,7 +15,7 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">
-              NeuralAutomate
+              Neural Automation
             </div>
             <p className="text-gray-400 mb-6">
               Передовые решения для автоматизации бизнеса с использованием искусственного интеллекта и нейросетей
