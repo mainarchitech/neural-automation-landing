@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Neural Automation - AI-Powered Automation Solutions',
+  title: 'Neural Automation  - AI-Powered Automation Solutions',
   description: 'Revolutionize your business with cutting-edge neural network automation technologies',
   manifest: '/manifest.json',
   icons: {

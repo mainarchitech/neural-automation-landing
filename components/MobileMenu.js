@@ -1,80 +1,44 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
-const MobileMenu = ({ isOpen, onClose, activeTab, setActiveTab }) => {
-  const menuItems = [
-    { id: 'home', label: 'Главная' },
-    { id: 'services', label: 'Услуги' },
-    { id: 'benefits', label: 'Преимущества' },
-    { id: 'contact', label: 'Контакты' },
-  ]
-
+export default function MobileMenu({ isOpen, onClose, items, active, onClickItem }) {
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black z-40"
+            className="fixed inset-0 bg-black/40 z-40"
             onClick={onClose}
           />
-          
-          {/* Menu */}
           <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed top-0 right-0 h-full w-80 bg-white z-50 shadow-2xl"
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+            className="fixed top-0 inset-x-0 z-50 bg-white border-b border-gray-200 rounded-b-2xl shadow-lg"
           >
-            <div className="p-6">
-              {/* Close Button */}
-              <button
-                onClick={onClose}
-                className="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-900"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              {/* Logo */}
-              <div className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">
-                Neural Automation
+            <div className="container mx-auto px-4 py-4">
+              <div className="flex items-center justify-between">
+                <div className="text-lg font-semibold">Меню</div>
+                <button onClick={onClose} className="p-2 rounded-lg hover:bg-gray-100" aria-label="Close menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                    <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
+                  </svg>
+                </button>
               </div>
-
-              {/* CTA Button */}
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-3 rounded-xl text-lg font-medium hover:shadow-lg transition-shadow text-left"
-              >
-                Начать проект
-              </motion.button>
-
-              {/* Menu Items */}
-              <nav className="space-y-4 mt-8">
-                {menuItems.map((item) => (
-                  <motion.button
+              <nav className="mt-3 grid gap-2 pb-2">
+                {items.map((item) => (
+                  <button
                     key={item.id}
-                    onClick={() => {
-                      setActiveTab(item.id)
-                      onClose()
-                    }}
-                    className={`w-full text-left px-4 py-3 rounded-xl text-lg font-medium transition-colors ${
-                      activeTab === item.id
-                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    onClick={(e) => onClickItem(e, item.href, item.id)}
+                    className={"w-full text-left px-4 py-3 rounded-xl " + (active === item.id ? "bg-blue-600 text-white" : "hover:bg-gray-100")}
                   >
                     {item.label}
-                  </motion.button>
+                  </button>
                 ))}
               </nav>
             </div>
@@ -84,5 +48,3 @@ const MobileMenu = ({ isOpen, onClose, activeTab, setActiveTab }) => {
     </AnimatePresence>
   )
 }
-
-export default MobileMenu

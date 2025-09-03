@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 
 const Services = () => {
   const [activeService, setActiveService] = useState(0)
@@ -9,14 +10,15 @@ const Services = () => {
   const services = [
     {
       title: "Автоматизация процессов",
-      description: "Полная автоматизация рутинных бизнес-процессов с помощью нейросетей. От обработки документов до управления workflow.",
+      description: "Полная автоматизация рутинных бизнес-процессов. От обработки документов до управления workflow.",
       features: [
         "Интеллектуальная обработка документов",
         "Автоматическое распределение задач",
         "Интеграция с существующими системами",
         "Мониторинг в реальном времени"
       ],
-      icon: "🤖"
+      icon: "🤖",
+      href: "/automation/processes"
     },
     {
       title: "AI Аналитика",
@@ -27,7 +29,8 @@ const Services = () => {
         "Автоматические отчеты",
         "Визуализация данных"
       ],
-      icon: "📊"
+      icon: "📊",
+      href: "/automation/analytics"
     },
     {
       title: "Чат-боты и поддержка",
@@ -38,7 +41,8 @@ const Services = () => {
         "Интеграция с CRM",
         "24/7 доступность"
       ],
-      icon: "💬"
+      icon: "💬",
+      href: "/automation/chatbots"
     },
     {
       title: "Интеграция AI",
@@ -49,13 +53,36 @@ const Services = () => {
         "Обучение сотрудников",
         "Техническая поддержка"
       ],
-      icon: "🔧"
+      icon: "🔧",
+      href: "/automation/integration"
+    },
+    {
+      title: "Консалтинг",
+      description: "Экспертные консультации по внедрению и развитию AI-решений для бизнеса.",
+      features: [
+        "Анализ бизнес-процессов",
+        "Подбор подходящих AI-технологий",
+        "Разработка стратегии внедрения",
+        "Сопровождение и поддержка"
+      ],
+      icon: "📈",
+      href: "/automation/consulting"   // 🔹 ссылка для новой услуги
     }
   ]
 
   return (
-    <section id="services" className="py-20 bg-white rounded-3xl shadow-lg scroll-mt-24">
-      <div className="container mx-auto px-4">
+      <section
+        id="services"
+        className="
+          bg-white rounded-3xl shadow-lg scroll-mt-24
+          pt-[5rem] pb-[9rem]          /* базово (мобилки) */
+          md:pt-[6rem] md:pb-[11rem]   /* планшеты */
+          lg:pt-8 lg:pb-12            /* ноутбуки (ещё меньше: 2rem сверху и 3rem снизу) */
+          xl:pt-8 xl:pb-12            /* оставляем такими же до 2xl */
+          2xl:pt-[8rem] 2xl:pb-[14rem] /* только очень большие мониторы делаем снова больше */
+        "
+      >
+        <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -72,7 +99,7 @@ const Services = () => {
         </motion.div>
 
         {/* Service Tabs */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-16">
           {services.map((service, index) => (
             <motion.button
               key={index}
@@ -100,23 +127,25 @@ const Services = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
             transition={{ duration: 0.3 }}
-            className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8"
+            className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-10 shadow-inner"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
                   {services[activeService].title}
                 </h3>
-                <p className="text-gray-600 text-lg mb-6">
+                <p className=" text-gray-600 text-lg mb-6">
                   {services[activeService].description}
                 </p>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-shadow"
-                >
-                  Узнать подробнее
-                </motion.button>
+                  <Link href={services[activeService].href}>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-shadow"
+                    >
+                      Узнать подробнее
+                    </motion.button>
+                  </Link>
               </div>
 
               <div>

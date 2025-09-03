@@ -1,67 +1,100 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useMemo, useState, useCallback } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import MobileMenu from './MobileMenu'
-import { useState } from 'react'
+import { motion } from 'framer-motion'
 
-const Navigation = ({ activeTab, setActiveTab }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+export default function Navigation() {
+  const pathname = usePathname()
+  const router = useRouter()
+  const isHome = pathname === '/'
 
-  const tabs = [
-    { id: 'home', label: 'Главная' },
-    { id: 'services', label: 'Услуги' },
-    { id: 'benefits', label: 'Преимущества' },
-    { id: 'contact', label: 'Контакты' },
-  ]
+  const items = useMemo(() => ([
+    { id: 'home', label: 'Главная', href: isHome ? '#home' : '/#home' },
+    { id: 'services', label: 'Услуги', href: isHome ? '#services' : '/#services' },
+    { id: 'benefits', label: 'Преимущества', href: isHome ? '#benefits' : '/#benefits' },
+    { id: 'contact', label: 'Контакты', href: isHome ? '#contact' : '/#contact' },
+  ]), [isHome])
+
+  const [active, setActive] = useState(null) // ← было 'home'
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  // Инициализация активного якоря только на главной
+  useEffect(() => {
+    if (!isHome || typeof window === 'undefined') {
+      setActive(null) // ← сбрасываем подсветку на внутренних страницах
+      return
+    }
+    const hash = window.location.hash?.replace('#', '')
+    if (hash) setActive(hash)
+    else setActive('home')
+  }, [isHome])
+
+  // Scroll spy — уже ограничен isHome (оставляем как есть)
+  useEffect(() => {
+    if (!isHome || typeof window === 'undefined') return
+    const ids = items.map(i => i.id)
+    const sections = ids.map(id => document.getElementById(id)).filter(Boolean)
+    if (!sections.length) return
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)
+      if (visible.length) setActive(visible[0].target.id)
+    }, { root: null, rootMargin: '-30% 0px -50% 0px', threshold: [0.1,0.25,0.5,0.75,1] })
+
+    sections.forEach(sec => observer.observe(sec))
+    return () => observer.disconnect()
+  }, [isHome, items])
+
+  const onClickItem = useCallback((e, href, id) => {
+    if (href.startsWith('#')) {
+      e.preventDefault()
+      const el = document.getElementById(id)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        setActive(id)
+        history.replaceState(null, '', `#${id}`)
+      }
+    } else {
+      router.push(href)
+    }
+    setMobileOpen(false)
+  }, [router])
 
   return (
     <>
       <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200/50 sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
             <div className="flex items-center">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-              >
+              <div className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Neural Automation
-              </motion.div>
+              </div>
             </div>
 
-            {/* Desktop Navigation Tabs - hidden on mobile */}
-            <div className="hidden md:flex space-x-1">
-              {tabs.map((tab) => (
-                <motion.button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                    activeTab === tab.id
-                      ? 'text-white'
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {activeTab === tab.id && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl"
-                      initial={false}
-                      transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 30
-                      }}
-                    />
-                  )}
-                  <span className="relative z-10">{tab.label}</span>
-                </motion.button>
-              ))}
+            {/* Desktop menu */}
+            <div className="hidden md:flex items-center space-x-2">
+              {items.map(item => {
+                const isActive = isHome && active === item.id
+                return (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    onClick={(e) => onClickItem(e, item.href, item.id)}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={
+                      "px-4 py-2 rounded-full transition-all " +
+                      (isActive ? "bg-blue-600 text-white" : "text-gray-700 hover:bg-gray-100")
+                    }
+                  >
+                    {item.label}
+                  </a>
+                )
+              })}
             </div>
 
-            {/* Desktop CTA Button - hidden on mobile */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -71,28 +104,25 @@ const Navigation = ({ activeTab, setActiveTab }) => {
               <span className="lg:hidden">Начать</span>
             </motion.button>
 
-            {/* Mobile Menu Button - shown only on mobile */}
+            {/* Mobile */}
             <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden p-2 text-gray-600 hover:text-gray-900"
+              className="md:hidden p-2 rounded-lg border border-gray-300"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              {/* ...иконка... */}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <MobileMenu
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        isOpen={mobileOpen}
+        items={items}
+        active={isHome ? active : null}  // ← в мобильном тоже без подсветки вне главной
+        onClose={() => setMobileOpen(false)}
+        onClickItem={onClickItem}
       />
     </>
   )
 }
-
-export default Navigation

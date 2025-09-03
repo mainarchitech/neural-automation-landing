@@ -43,7 +43,16 @@ const Benefits = () => {
   ]
 
   return (
-    <section id="benefits" className="py-20 bg-gray-50 rounded-3xl shadow-lg scroll-mt-24">
+    <section id="benefits"         
+      className="
+          bg-white rounded-3xl shadow-lg scroll-mt-24
+          pt-[5rem] pb-[9rem]          /* базово (мобилки) */
+          md:pt-[6rem] md:pb-[11rem]   /* планшеты */
+          lg:pt-8 lg:pb-12            /* ноутбуки (ещё меньше: 2rem сверху и 3rem снизу) */
+          xl:pt-8 xl:pb-12            /* оставляем такими же до 2xl */
+          2xl:pt-[8rem] 2xl:pb-[10rem] /* только очень большие мониторы делаем снова больше */
+        "
+      >
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
