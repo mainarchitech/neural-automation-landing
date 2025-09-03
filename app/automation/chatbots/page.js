@@ -43,23 +43,23 @@ const ChatbotsPage = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-100 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-60 py-12 rounded-3xl">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Чат-боты
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Умные AI-помощники для автоматизации коммуникации с клиентами и сотрудниками
-          </p>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Чат-боты
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Умные AI-помощники для автоматизации коммуникации с клиентами и сотрудниками
+            </p>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
           {cases.map((caseItem, index) => (
             <motion.div
               key={index}

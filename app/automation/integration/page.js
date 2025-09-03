@@ -43,7 +43,7 @@ const IntegrationPage = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-60 py-12 rounded-3xl">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

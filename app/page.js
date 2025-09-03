@@ -9,33 +9,18 @@ import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('home')
-
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'services':
-        return <Services />
-      case 'benefits':
-        return <Benefits />
-      case 'contact':
-        return <Contact />
-      default:
-        return (
-          <div className="space-y-24">
-            <Hero />
-            <Services />
-            <Benefits />
-            <Contact />
-          </div>
-        )
-    }
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Navigation />
       <main className="container mx-auto px-4 py-8">
-        {renderContent()}
+        <div className="space-y-24">
+          <Hero />
+          <div className="space-y-24">
+            <Services />
+          </div>
+          <Benefits />
+          <Contact />
+        </div>
       </main>
       <Footer />
     </div>
