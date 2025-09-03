@@ -17,11 +17,11 @@ const services: ServiceLink[] = [
 ];
 
 const resources: ResourceLink[] = [
-  { name: 'Блог', href: '#' },
-  { name: 'Кейсы', href: '/automation/processes' },
-  { name: 'Документация', href: '#' },
-  { name: 'Вебинары', href: '#' },
-  { name: 'Поддержка', href: '/#contacts' },
+  { name: 'Блог', href: '/resources/blog' },
+  { name: 'Кейсы', href: '/resources/cases' },
+  { name: 'Документация', href: '/resources/docs' },
+  { name: 'Вебинары', href: '/resources/webinars' },
+  { name: 'Поддержка', href: '/resources/support' }
 ];
 
 const socials: SocialLink[] = [
