@@ -70,15 +70,20 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Ресурсы</h3>
             <ul className="space-y-2">
               {[
-                'Блог',
-                'Кейсы',
-                'Документация',
-                'Вебинары',
-                'Поддержка'
+                { name: 'Блог', link: '/resources/blog' },
+                { name: 'Кейсы', link: '/resources/cases' },
+                { name: 'Документация', link: '/resources/docs' },
+                { name: 'Вебинары', link: '/resources/webinars' },
+                { name: 'Поддержка', link: '/resources/support' }
               ].map((resource, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                    {resource}
+                  <a
+                    href={resource.link}
+                    className="text-gray-400 hover:text-white transition-colors group"
+                  >
+                    <div className="font-medium group-hover:text-blue-400">
+                      {resource.name}
+                    </div>
                   </a>
                 </li>
               ))}
