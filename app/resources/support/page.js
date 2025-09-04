@@ -163,7 +163,7 @@ const resources = [
 
 export default function SupportPage() {
   const [activeCategory, setActiveCategory] = useState('general')
-  const [openQuestion, setOpenQuestion] = useState<number | null>(null)
+  const [openQuestion, setOpenQuestion] = useState(null)
 
   return (
     <div className="min-h-screen bg-gray-50 py-12">

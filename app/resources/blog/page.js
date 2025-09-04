@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
 
 const blogPosts = [
@@ -9,63 +10,71 @@ const blogPosts = [
     id: 1,
     title: 'Искусственный интеллект в автоматизации бизнес-процессов: тренды 2024',
     excerpt: 'Обзор современных технологий ИИ для автоматизации рутинных операций и повышения эффективности бизнеса.',
-    date: '15 января 2024',
-    author: 'Алексей Петров',
+    date: '6 августа 2024',
+    author: 'Лия',
     category: 'AI технологии',
     readTime: '8 мин чтения',
-    image: '/api/placeholder/400/250'
+    image: '/placeholder/250.webp',
+    href: 'https://vc.ru/ai/1368805-ii-v-biznese-trendy-na-2024-i-2025-gody'
   },
   {
     id: 2,
-    title: 'Нейросети для анализа больших данных: практическое применение',
+    title: 'Лучшие нейросети для анализа данных: современные инструменты для профессиональной аналитики',
     excerpt: 'Как нейронные сети помогают обрабатывать огромные объемы информации и извлекать ценные инсайты.',
-    date: '22 января 2024',
-    author: 'Мария Иванова',
+    date: '16 июля 2025',
+    author: 'НейроВед',
     category: 'Аналитика',
     readTime: '12 мин чтения',
-    image: '/api/placeholder/400/250'
+    image: '/placeholder/251.webp',
+    href: 'https://vc.ru/ai/2103297-luchshie-nevroseti-dlya-analiza-dannyh'
   },
   {
     id: 3,
-    title: 'ChatGPT для бизнеса: интеграция и лучшие практики',
+    title: 'ChatGPT: Полное руководство по использованию для бизнеса',
     excerpt: 'Практическое руководство по внедрению чат-ботов на основе GPT в вашу компанию.',
     date: '30 января 2024',
-    author: 'Дмитрий Смирнов',
+    author: 'Игорь Телегин',
     category: 'Чат-боты',
     readTime: '10 мин чтения',
-    image: '/api/placeholder/400/250'
+    image: '/placeholder/252.webp',
+    href: 'https://vc.ru/chatgpt/1928545-chatgpt-dlya-biznesa-polnoe-rukovodstvo'
   },
   {
     id: 4,
     title: 'Машинное обучение для прогнозирования продаж',
-    excerpt: 'Как ML-алгоритмы помогают предсказывать спрос и оптимизировать inventory management.',
-    date: '5 февраля 2024',
-    author: 'Ольга Кузнецова',
+    excerpt: 'Как прогнозировать спрос и автоматизировать закупки с помощью machine learning: кейс Ozon.',
+    date: '4 декабря 2018',
+    author: 'aalekseytsev',
     category: 'Прогнозирование',
     readTime: '15 мин чтения',
-    image: '/api/placeholder/400/250'
+    image: '/placeholder/253.png',
+    href: 'https://habr.com/ru/companies/ozontech/articles/431950/'
   },
   {
     id: 5,
     title: 'Автоматизация документооборота с помощью ИИ',
-    excerpt: 'Современные решения для обработки документов, распознавания текста и автоматизации workflow.',
-    date: '12 февраля 2024',
-    author: 'Сергей Васильев',
+    excerpt: 'Как внедрить искусственный интеллект в работу с документами и не разочароваться',
+    date: '4 октебря 2023',
+    author: 'Михаил Хорьков',
     category: 'Документооборот',
     readTime: '9 мин чтения',
-    image: '/api/placeholder/400/250'
+    image: '/placeholder/254.png',
+    href: 'https://secrets.tbank.ru/blogi-kompanij/ai-v-rabote-s-dokumentami/?utm_referrer=https%3A%2F%2Fwww.google.com%2F'
   },
   {
     id: 6,
     title: 'Computer Vision в промышленности: кейсы внедрения',
-    excerpt: 'Как компьютерное зрение помогает контролировать качество продукции и оптимизировать производство.',
-    date: '20 февраля 2024',
-    author: 'Анна Попова',
+    excerpt: 'Экосистема для разработки и применения Computer Vision (CV) в промышленности',
+    date: '13 февраля 2024',
+    author: 'Юрий Кацер',
     category: 'Computer Vision',
     readTime: '14 мин чтения',
-    image: '/api/placeholder/400/250'
+    image: '/placeholder/255.png',
+    href: 'https://habr.com/ru/articles/882204/'
   }
 ]
+
+const isPlaceholder = (src) => !src || src.startsWith('/api/placeholder')
 
 export default function BlogPage() {
   return (
@@ -116,8 +125,21 @@ export default function BlogPage() {
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
             >
-              <div className="h-48 bg-gradient-to-r from-blue-400 to-purple-400 flex items-center justify-center">
-                <span className="text-white text-lg font-semibold">Изображение статьи</span>
+              <div className="relative h-48 w-full overflow-hidden">
+                {isPlaceholder(post.image) ? (
+                  <div className="h-full w-full bg-gradient-to-r from-blue-400 to-purple-400 flex items-center justify-center">
+                    <span className="text-white text-lg font-semibold">Изображение статьи</span>
+                  </div>
+                ) : (
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 ease-in-out hover:scale-110"
+                    priority={index < 2}
+                  />
+                )}
               </div>
               
               <div className="p-6">
@@ -129,7 +151,15 @@ export default function BlogPage() {
                 </div>
                 
                 <h2 className="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
-                  {post.title}
+                  {post.href ? (
+                    <a href={post.href} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      {post.title}
+                    </a>
+                  ) : (
+                    <Link href={`/resources/blog/${post.id}`} className="hover:underline">
+                      {post.title}
+                    </Link>
+                  )}
                 </h2>
                 
                 <p className="text-gray-600 mb-4 line-clamp-3">
@@ -142,12 +172,28 @@ export default function BlogPage() {
                     <div>{post.date}</div>
                   </div>
                   
-                  <Link
-                    href={`/resources/blog/${post.id}`}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    Читать
-                  </Link>
+                  {(() => {
+                    const link = post.href ? post.href : `/resources/blog/${post.id}`
+                    const isExternal = /^https?:\/\//.test(link)
+
+                    return isExternal ? (
+                      <a
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Читать
+                      </a>
+                    ) : (
+                      <Link
+                        href={link}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      >
+                        Читать
+                      </Link>
+                    )
+                  })()}
                 </div>
               </div>
             </motion.article>
